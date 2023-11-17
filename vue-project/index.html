@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container" id="app">
+        <div class="card">
+            <h1>{{ title }}</h1>
+            <div class="form-control">
+                <input type="text" 
+                    :placeholder="placeholderStr" 
+                    :value="inputValue"
+                    @input="inputChangeHandler"
+                    @keypress.enter="addNewNote"/>
+            </div>
+            <button class="btn" @click="addNewNote">Add</button>
+            <hr />
+            <ul class="list" v-if="notes.length !== 0">
+                <li class="list-item" v-for="(note, index) in notes">
+                    {{toUpperCase(note)}}
+                    <button class="btn" v-on:click="removeNote(index)">Delete</button>
+                </li>
+                <hr />
+                <li class="common-count">
+                    <h3>Common count: {{notes.length}}</h3>
+                    <button @click="removeAll">Delete All</button>
+                </li>
+            </ul>
+            <div v-else class="else-of-list">
+                You have no notes
+            </div>
+        </div>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
